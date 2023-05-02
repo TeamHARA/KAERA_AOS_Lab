@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.android.hara_aos_lab'
+    namespace 'com.android.expandableview'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.android.hara_aos_lab"
+        applicationId "com.android.expandableview"
         minSdk 31
         targetSdk 33
         versionCode 1

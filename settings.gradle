@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "HARA_AOS_Lab"
 include ':app'
 include ':floatinganimation'
+include ':expandableview'
