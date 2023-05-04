@@ -4,99 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="#1E2227"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_root"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginHorizontal="20dp"
-        android:animateLayoutChanges="true"
-        android:background="@drawable/gradient_expand"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_gem"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/orange_gem"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="장단점 생각하기"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_gem"
-            app:layout_constraintStart_toEndOf="@+id/iv_gem"
-            app:layout_constraintTop_toTopOf="@+id/iv_gem" />
-
-
-        <ImageView
-            android:id="@+id/iv_arrow"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:padding="10dp"
-            android:src="@drawable/arrow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="-6dp"
-            android:layout_marginBottom="20dp"
-            android:animateLayoutChanges="true"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_gem"
-            tools:visibility="visible">
-            <!--
-                marginTop -6의 이유 현재 피그마롤 보게 되면
-                상세 내용이 없을때는 아래 마진이 16dp 였다가 상세내용이
-                나오게 되면 상세내용과의 마진으로 변경되면서 10dp 간격이 나온다
-                이를 제약으로 해결하기보다 top margin을 -6을 줘버려서
-                간격차를 조정해준다.
-            -->
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요."
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/white"
-                android:text="작성하러가기"
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_content" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginVertical="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_expand" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

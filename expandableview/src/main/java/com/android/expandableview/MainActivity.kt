@@ -1,5 +1,6 @@
 package com.android.expandableview
 
+import CustomItemAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var expand = false
-
+        val list = listOf<SampleData>(
+            SampleData("1", "2"),
+            SampleData("1", "2"),
+            SampleData("1", "2")
+        )
         val expandDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_expand)
         val collapseDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_collapse)
         // 현재 이슈
@@ -25,23 +30,10 @@ class MainActivity : AppCompatActivity() {
         // 근본적인 해결책을 찾아낼것인지 고민해봐야함 일단은 view의 상태 변화에도
         // 약간 gradient의 차이가 발생하더라도 drawalbe을 교체하지 않는 이상태로 두겠음
         // 혹시 리싸이클러뷰에서 적용하면 다르게 작동할지도 모름
-
-//        binding.clRoot.viewTreeObserver.addOnGlobalLayoutListener {
-//            if (expand)
-//                binding.clRoot.background = expandDrawable
-//            else
-//                binding.clRoot.background = collapseDrawable
-//        }
-
-        binding.ivArrow.setOnClickListener {
-            ExpandAnimation.toggleArrow(binding.ivArrow, !expand)
-            if (!expand) {
-                binding.clContent.visibility = View.VISIBLE
-            } else {
-                binding.clContent.visibility = View.GONE
-            }
-            expand = !expand
-        }
+        val adapter = ExpandAdapter()
+        binding.rcv.adapter = adapter
+        binding.rcv.itemAnimator = CustomItemAnimator()
+        adapter.submitList(list)
     }
 
     fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: ConstraintLayout): Boolean {
