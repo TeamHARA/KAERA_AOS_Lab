@@ -26,9 +26,12 @@ class ExpandAdapter : ListAdapter<SampleData, ExpandAdapter.ItemViewHolder>(Glob
             binding.ivArrow.setOnClickListener {
                 ExpandAnimation.toggleArrow(binding.ivArrow, !curItem.expand)
                 if (!curItem.expand) {
-                    binding.clContent.visibility = View.VISIBLE
+                    ExpandAnimation.expand(binding.clContent)
+                    //binding.clContent.visibility = View.VISIBLE
+                    // 이렇게 하려면  android:animateLayoutChanges="true" 속성적용
                 } else {
-                    binding.clContent.visibility = View.GONE
+                    ExpandAnimation.collapse(binding.clContent)
+                    //binding.clContent.visibility = View.GONE
                 }
                 curItem.expand = !curItem.expand
             }

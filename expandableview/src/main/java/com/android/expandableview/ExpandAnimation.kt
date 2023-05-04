@@ -2,6 +2,7 @@ package com.android.expandableview
 
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.Transformation
 
@@ -10,21 +11,20 @@ class ExpandAnimation {
     companion object {
 
         fun toggleArrow(view: View, isExpanded: Boolean): Boolean {
-            if (isExpanded) {
-                view.animate().setDuration(200).rotation(180f)
-                return true
-            } else {
+            if (!isExpanded) {
                 view.animate().setDuration(200).rotation(0f)
                 return false
+            } else {
+                view.animate().setDuration(200).rotation(180f)
+                return true
             }
         }
-
         fun expand(view: View) {
             val animation = expandAction(view)
             view.startAnimation(animation)
         }
 
-        private fun expandAction(view: View): Animation {
+        private fun expandAction(view: View) : Animation {
             view.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             val actualHeight = view.measuredHeight
 
@@ -33,16 +33,14 @@ class ExpandAnimation {
 
             val animation = object : Animation() {
                 override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {
-                    view.layoutParams.height =
-                        if (interpolatedTime == 1f) ViewGroup.LayoutParams.WRAP_CONTENT
-                        else (actualHeight * interpolatedTime).toInt()
+                    view.layoutParams.height = if (interpolatedTime == 1f) ViewGroup.LayoutParams.WRAP_CONTENT
+                    else (actualHeight * interpolatedTime).toInt()
 
                     view.requestLayout()
                 }
             }
-
-            animation.duration =
-                (actualHeight / view.context.resources.displayMetrics.density).toLong()
+            animation.interpolator = AccelerateDecelerateInterpolator()
+            animation.duration = (actualHeight / view.context.resources.displayMetrics.density).toLong()
 
             view.startAnimation(animation)
 
@@ -57,8 +55,7 @@ class ExpandAnimation {
                     if (interpolatedTime == 1f) {
                         view.visibility = View.GONE
                     } else {
-                        view.layoutParams.height =
-                            (actualHeight - (actualHeight * interpolatedTime)).toInt()
+                        view.layoutParams.height = (actualHeight - (actualHeight * interpolatedTime)).toInt()
                         view.requestLayout()
                     }
                 }
