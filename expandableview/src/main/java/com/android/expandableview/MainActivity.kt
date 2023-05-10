@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
 
         var expand = false
         val list = listOf<SampleData>(
-            SampleData("1", "2"),
-            SampleData("1", "2"),
-            SampleData("1", "2")
+            SampleData("장점", "고민이 가지고 있는 선택지를 나열해보고, "),
+            SampleData("단점", "그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.고민이 가지고 있는 선택지를 나열해보고,"),
+            SampleData("생각하기", "고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.")
         )
         val expandDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_expand)
         val collapseDrawable = ContextCompat.getDrawable(this, R.drawable.gradient_collapse)
@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
         // 토글 레이아웃을 위한 애니메이션
         // 열심히 만들어놨는데 실기기에서 깜빡임 이슈가 있어서
         // constraintLayout에 android:animateLayoutChanges="true" 하나만 추가하면 됨
-        // 하지만 현재 확장시 문제가 있어서 해결중 2023.05.10
+        // 하지만 리싸이클러뷰와 함께 사용할 경우 이슈가 생겨서 다시 커스텀 애니메이션 사용
+        // 높이 측정을 정밀하게 해주는 것으로 해결
         ExpandAnimation.toggleArrow(view, isExpanded)
         if (isExpanded) {
             ExpandAnimation.expand(layoutExpand)

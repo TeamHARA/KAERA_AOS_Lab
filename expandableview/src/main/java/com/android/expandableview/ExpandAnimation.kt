@@ -1,10 +1,8 @@
 package com.android.expandableview
 
-import android.animation.ValueAnimator
-import android.util.Log
+import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.Transformation
 
@@ -27,10 +25,22 @@ class ExpandAnimation {
             view.startAnimation(animation)
         }
 
+        @SuppressLint("Range")
         private fun expandAction(view: View): Animation {
 
-            view.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            val actualHeight = view.measuredHeight
+            //view.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            view.measure(
+                View.MeasureSpec.makeMeasureSpec(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    View.MeasureSpec.EXACTLY
+                ),
+                View.MeasureSpec.makeMeasureSpec(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    View.MeasureSpec.AT_MOST
+                )
+            )
+            // 정밀도를 따로 지정해주어서 정확하게 확장될 view의 높이를 정확하게 측정
+            var actualHeight = view.measuredHeight
 
             view.layoutParams.height = 0
             view.visibility = View.VISIBLE
@@ -89,7 +99,8 @@ class ExpandAnimation {
                         view.visibility = View.GONE
                         view.requestLayout()
                     } else {
-                        view.layoutParams.height = (actualHeight - (actualHeight * interpolatedTime)).toInt()
+                        view.layoutParams.height =
+                            (actualHeight - (actualHeight * interpolatedTime)).toInt()
                         view.requestLayout()
                     }
                 }
