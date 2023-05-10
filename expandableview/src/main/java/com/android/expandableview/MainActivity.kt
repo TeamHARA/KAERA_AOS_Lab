@@ -1,6 +1,7 @@
 package com.android.expandableview
 
 import CustomItemAnimator
+import android.animation.LayoutTransition
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -32,14 +33,16 @@ class MainActivity : AppCompatActivity() {
         // 혹시 리싸이클러뷰에서 적용하면 다르게 작동할지도 모름
         val adapter = ExpandAdapter()
         binding.rcv.adapter = adapter
-        binding.rcv.itemAnimator = CustomItemAnimator()
+        //binding.rcv.itemAnimator = CustomItemAnimator()
+
         adapter.submitList(list)
     }
 
     fun toggleLayout(isExpanded: Boolean, view: View, layoutExpand: ConstraintLayout): Boolean {
         // 토글 레이아웃을 위한 애니메이션
         // 열심히 만들어놨는데 실기기에서 깜빡임 이슈가 있어서
-        // constraintLayout에 android:animateLayoutChanges="true" 하나만 추가하면 됨..
+        // constraintLayout에 android:animateLayoutChanges="true" 하나만 추가하면 됨
+        // 하지만 현재 확장시 문제가 있어서 해결중 2023.05.10
         ExpandAnimation.toggleArrow(view, isExpanded)
         if (isExpanded) {
             ExpandAnimation.expand(layoutExpand)

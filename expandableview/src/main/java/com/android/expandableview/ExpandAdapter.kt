@@ -1,5 +1,7 @@
 package com.android.expandableview
 
+import android.animation.LayoutTransition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,19 +25,25 @@ class ExpandAdapter : ListAdapter<SampleData, ExpandAdapter.ItemViewHolder>(Glob
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val curItem = getItem(position)
         with(holder) {
+            //this.binding.root.layoutTransition.enableTransitionType(LayoutTransition.DISAPPEARING)
+            // android:animationLayoutChanges 속성 사용시 애니메이션 종류 변경
             binding.ivArrow.setOnClickListener {
                 ExpandAnimation.toggleArrow(binding.ivArrow, !curItem.expand)
                 if (!curItem.expand) {
                     ExpandAnimation.expand(binding.clContent)
-                    //binding.clContent.visibility = View.VISIBLE
+//                    binding.clContent.requestLayout()
+//                    TransitionManager.beginDelayedTransition(binding.clRoot)
+//                    binding.clContent.visibility = View.VISIBLE
                     // 이렇게 하려면  android:animateLayoutChanges="true" 속성적용
                 } else {
                     ExpandAnimation.collapse(binding.clContent)
-                    //binding.clContent.visibility = View.GONE
+//                    TransitionManager.beginDelayedTransition(binding.clRoot)
+//                    binding.clContent.visibility = View.GONE
                 }
                 curItem.expand = !curItem.expand
             }
         }
     }
+
 
 }

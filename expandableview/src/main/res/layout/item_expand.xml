@@ -71,7 +71,6 @@
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요.고민이 가지고 있는 선택지를 나열해보고, 그 선택지가 어떤 장점과 단점을 가지고 있는지 생각할 수 있는 시간을 가질 수 있어요."
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
