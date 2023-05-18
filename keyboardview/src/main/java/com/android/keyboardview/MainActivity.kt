@@ -15,7 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // 현재 매니페스트파일에서 adjustresize 속성을 통해서 사용하고 있음
+        // 하지만 현재 이속성은 지원중단이므로 나중에는 해당 코드를 대체해야함..
+        // 우선 현재는 이걸로 만족
         binding.root.viewTreeObserver.addOnGlobalLayoutListener {
             val r = Rect()
             binding.root.getWindowVisibleDisplayFrame(r)
