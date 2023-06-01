@@ -28,22 +28,53 @@ class MainActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 if (s.toString().isEmpty()) {
-                    binding.textInputLayout.error = "공백은 허용하지 않습니다."
+                    binding.textInputLayout.error = " "
                 } else {
                     s.toString().toIntOrNull()?.let {
                         if (s != null) {
                             if (s.length > 4) {
-                                binding.textInputLayout.error = "4글자가 초과되었습니다."
+                                binding.textInputLayout.error = " "
                             } else {
                                 binding.textInputLayout.error = null
                             }
                         }
                     } ?: run {
-                        binding.textInputLayout.error = "숫자를 입력하세요."
+                        binding.textInputLayout.error = " "
                     }
                 }
             }
         })
+
+        binding.editText2.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s.toString().isEmpty()) {
+                    binding.textInputLayout2.error = "공백은 허용하지 않습니다."
+                } else {
+                    s.toString().toIntOrNull()?.let {
+                        if (s != null) {
+                            if (s.length > 4) {
+                                binding.textInputLayout2.error = "4글자가 초과되었습니다."
+                            } else {
+                                binding.textInputLayout2.error = null
+                            }
+                        }
+                    } ?: run {
+                        binding.textInputLayout2.error = "숫자를 입력하세요."
+                    }
+                }
+            }
+        })
+
     }
 
 //        binding.textInputLayout.editText?.setOnFocusChangeListener { _, hasFocus ->
