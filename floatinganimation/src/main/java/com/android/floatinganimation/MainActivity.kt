@@ -20,20 +20,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val animator = ValueAnimator.ofInt(200, 300).apply { // 지혼자 움찔거리는 애니메이션
-            duration = 1000
-            repeatCount = ValueAnimator.INFINITE
-            repeatMode = ValueAnimator.REVERSE
-            startDelay = 1000
-            addUpdateListener { animation ->
-                val layoutParams = binding.ivOre.layoutParams.apply {
-                    height = animation.animatedValue as Int
-                }
-                layoutParams.height = animation.animatedValue as Int
-                binding.ivOre.layoutParams = layoutParams
-            }
-        }
-        animator.start()
+//        val animator = ValueAnimator.ofInt(200, 300).apply { // 지혼자 움찔거리는 애니메이션
+//            duration = 1000
+//            repeatCount = ValueAnimator.INFINITE
+//            repeatMode = ValueAnimator.REVERSE
+//            startDelay = 1000
+//            addUpdateListener { animation ->
+//                val layoutParams = binding.ivOre.layoutParams.apply {
+//                    height = animation.animatedValue as Int
+//                }
+//                layoutParams.height = animation.animatedValue as Int
+//                binding.ivOre.layoutParams = layoutParams
+//            }
+//        }
+//        animator.start()
 
 //        binding.apply { // translateAnimation
 //            tvGem.startAnimation(floatingAnimationWithTranslateAnimation(0, 1000,-50F))
@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         binding.apply { // ValueAnimator
-            floatingAnimationWithValueAnimator(0, 1000,tvGem,-50F).start()
-            floatingAnimationWithValueAnimator(500, 1000,tvStone,-50F).start()
-            floatingAnimationWithValueAnimator(1500, 1000,clGem,-50F).start()
+            floatingAnimationWithValueAnimator(0, 1000,tvGem,-20F).start()
+            floatingAnimationWithValueAnimator(500, 1000,tvStone,-30F).start()
+            floatingAnimationWithValueAnimator(1500, 1000,clGem,-40F).start()
             floatingAnimationWithValueAnimator(2000, 1000,clStone,-50F).start()
         }
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             interpolator = AccelerateDecelerateInterpolator()
             startDelay = start
             addUpdateListener {
-                view.translationY = animatedValue as Float * 20f
+                view.translationY = animatedValue as Float * movement
             }
         }
     }
